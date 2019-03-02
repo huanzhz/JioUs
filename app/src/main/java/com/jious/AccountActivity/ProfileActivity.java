@@ -8,25 +8,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.jious.Model.User;
 import com.jious.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private Button btnChangePassword, btnRemoveUser,
             changePassword, remove, signOut;
-    private TextView email;
+    private TextView email, userName;
 
-    private EditText oldEmail, password, newPassword;
+    private EditText password, newPassword;
+    private ImageView profile_image;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+    private FirebaseUser fireUser;
+
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +46,33 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
+        userName = findViewById(R.id.profile_username);
         email = (TextView) findViewById(R.id.useremail);
+        profile_image = findViewById(R.id.profileimage);
 
         //get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        setDataToView(user);
+        fireUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("User").child(fireUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User userObj = dataSnapshot.getValue(User.class);
+
+                email.setText("User Email: " + fireUser.getEmail());
+                userName.setText(userObj.getUsername());
+                if(userObj.getImageURL().equals("default")){
+                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                }else{
+                    Glide.with(ProfileActivity.this).load(userObj.getImageURL()).into(profile_image);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -53,7 +87,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
 
-
         btnChangePassword = (Button) findViewById(R.id.change_password_button);
 
         btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
@@ -63,12 +96,8 @@ public class ProfileActivity extends AppCompatActivity {
         remove = (Button) findViewById(R.id.remove);
         signOut = (Button) findViewById(R.id.sign_out);
 
-        oldEmail = (EditText) findViewById(R.id.old_email);
-
         password = (EditText) findViewById(R.id.password);
         newPassword = (EditText) findViewById(R.id.newPassword);
-
-        oldEmail.setVisibility(View.GONE);
 
         password.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
@@ -87,7 +116,6 @@ public class ProfileActivity extends AppCompatActivity {
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                oldEmail.setVisibility(View.GONE);
 
                 password.setVisibility(View.GONE);
                 newPassword.setVisibility(View.VISIBLE);
@@ -102,12 +130,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (user != null && !newPassword.getText().toString().trim().equals("")) {
+                if (fireUser != null && !newPassword.getText().toString().trim().equals("")) {
                     if (newPassword.getText().toString().trim().length() < 6) {
                         newPassword.setError("Password too short, enter minimum 6 characters");
                         progressBar.setVisibility(View.GONE);
                     } else {
-                        user.updatePassword(newPassword.getText().toString().trim())
+                        fireUser.updatePassword(newPassword.getText().toString().trim())
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -134,8 +162,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (user != null) {
-                    user.delete()
+                if (fireUser != null) {
+                    fireUser.delete()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -163,14 +191,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    private void setDataToView(FirebaseUser user) {
-
-        email.setText("User Email: " + user.getEmail());
-
-
-    }
-
     // this listener will be called when there is change in firebase user session
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
         @SuppressLint("SetTextI18n")
@@ -182,9 +202,6 @@ public class ProfileActivity extends AppCompatActivity {
                 // launch login activity
                 startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                 finish();
-            } else {
-                setDataToView(user);
-
             }
         }
 
@@ -194,9 +211,7 @@ public class ProfileActivity extends AppCompatActivity {
     //sign out method
     public void signOut() {
         auth.signOut();
-
-
-// this listener will be called when there is change in firebase user session
+        // this listener will be called when there is change in firebase user session
         FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
