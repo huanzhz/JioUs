@@ -6,20 +6,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".AccountActivity.ProfileActivity">
 
-<EditText
-    android:id="@+id/old_email"
-    android:layout_width="368dp"
-    android:layout_height="wrap_content"
-    android:hint="@string/hint_email"
-    android:inputType="textEmailAddress"
-    android:maxLines="1"
-    tools:layout_editor_absoluteY="82dp"
-    tools:layout_editor_absoluteX="8dp"
-    android:layout_above="@+id/password"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="17dp" />
-
-<EditText
+    <EditText
     android:id="@+id/password"
     android:layout_width="400dp"
     android:layout_height="wrap_content"
@@ -128,16 +115,35 @@ tools:context=".AccountActivity.ProfileActivity">
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true" />
 
-<TextView
-    android:id="@+id/useremail"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_above="@+id/old_email"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="46dp"
-    android:gravity="center"
-    android:hint="@string/email_id"
-    android:textSize="30sp"
-    android:textStyle="bold|italic" />
+    <TextView
+        android:id="@+id/useremail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_username"
+        android:layout_marginBottom="19dp"
+        android:gravity="center"
+        android:hint="@string/email_id"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/profile_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/password"
+        android:layout_marginBottom="58dp"
+        android:gravity="center"
+        android:hint="@string/username_id"
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/useremail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp" />
+
 
 </RelativeLayout>
