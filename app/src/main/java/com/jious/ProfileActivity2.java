@@ -2,10 +2,18 @@ package com.jious;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewParent;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +26,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jious.AccountActivity.LoginActivity;
 import com.jious.AccountActivity.ProfileActivity;
+import com.jious.Fragments.ChatsFragment;
+import com.jious.Fragments.UsersFragment;
 import com.jious.Model.User;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -59,6 +71,18 @@ public class ProfileActivity2 extends AppCompatActivity {
 
             }
         });
+
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+        viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+
+        viewPager.setAdapter(viewPagerAdapter);
+
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -78,5 +102,38 @@ public class ProfileActivity2 extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private ArrayList<Fragment> fragments;
+        private ArrayList<String> titles;
+
+        ViewPagerAdapter(FragmentManager fm){
+            super(fm);
+            this.fragments = new ArrayList<>();
+            this.titles = new ArrayList<>();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        public void addFragment(Fragment fragment, String title){
+            fragments.add(fragment);
+            titles.add(title);
+        }
+
+        // Ctrl + O to implement this method
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles.get(position);
+        }
     }
 }
