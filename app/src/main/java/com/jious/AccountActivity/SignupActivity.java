@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.jious.MainActivity;
+import com.jious.ProfileActivity2;
 import com.jious.R;
 
 import java.util.HashMap;
@@ -107,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                                     FirebaseUser firebaseUser = auth.getCurrentUser();
                                     String userid = firebaseUser.getUid();
 
-                                    reference = FirebaseDatabase.getInstance().getReference("User").child(userid);
+                                    reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
                                     HashMap<String, String>hashMap = new HashMap<>();
                                     hashMap.put("id", userid);
@@ -116,7 +117,7 @@ public class SignupActivity extends AppCompatActivity {
 
                                     reference.setValue(hashMap);
 
-                                    startActivity(new Intent(SignupActivity.this, ProfileActivity.class));
+                                    startActivity(new Intent(SignupActivity.this, ProfileActivity2.class));
                                     finish();
                                 }
                             }
