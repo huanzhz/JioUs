@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //get current user
         fireUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("User").child(fireUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(fireUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
