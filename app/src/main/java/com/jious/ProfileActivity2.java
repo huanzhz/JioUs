@@ -64,7 +64,7 @@ public class ProfileActivity2 extends AppCompatActivity {
                 if(userObj.getImageURL().equals("default")){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(ProfileActivity2.this).load(userObj.getImageURL()).into(profile_image);
+                    Glide.with(getApplicationContext()).load(userObj.getImageURL()).into(profile_image);
                 }
             }
 
