@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.jious.AccountActivity.LoginActivity;
 import com.jious.AccountActivity.ProfileActivity;
 import com.jious.Fragments.ChatsFragment;
+import com.jious.Fragments.ProfileFragment;
 import com.jious.Fragments.UsersFragment;
 import com.jious.Model.User;
 
@@ -79,6 +80,7 @@ public class ProfileActivity2 extends AppCompatActivity {
 
         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
         viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+        viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
 
         viewPager.setAdapter(viewPagerAdapter);
 
