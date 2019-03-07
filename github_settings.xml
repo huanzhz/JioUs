@@ -1,0 +1,7 @@
+<application>
+  <component name="GithubAccounts">
+    <account id="e75a29b6-8a27-4ea3-a1ae-4e60f9b812d0" name="arcswim">
+      <server host="github.com" />
+    </account>
+  </component>
+</application>
