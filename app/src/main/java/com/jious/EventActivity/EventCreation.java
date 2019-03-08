@@ -1,5 +1,6 @@
 package com.jious.EventActivity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -74,6 +75,7 @@ public class EventCreation extends AppCompatActivity {
 
             databaseEvent.child(eventid).setValue(event);
             Toast.makeText(this,"Event added",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(EventCreation.this, EventView.class));
         }
 
     }
