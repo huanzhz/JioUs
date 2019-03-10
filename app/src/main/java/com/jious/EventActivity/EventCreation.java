@@ -6,6 +6,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,10 +24,24 @@ import android.text.util.*;
 import com.jious.R;
 import com.jious.Model.Event;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 public class EventCreation extends AppCompatActivity {
 
     EditText eName,eDes,eLocation,sDate,sTime,eDate,eTime;
-    Button Create;
+    TextView tvWeather;
+    Button Create,Weather;
 
 
      FirebaseUser fireUser;
@@ -40,7 +61,9 @@ public class EventCreation extends AppCompatActivity {
         eDate= (EditText) findViewById(R.id.text_eDate);
         sTime = (EditText) findViewById(R.id.text_sTime);
         eTime = (EditText) findViewById(R.id.text_eTime);
+        tvWeather= (TextView) findViewById(R.id.textViewWeather);
         Create = (Button) findViewById(R.id.btn_create);
+        Weather = (Button) findViewById(R.id.btn_weather);
 
 
 
@@ -48,6 +71,15 @@ public class EventCreation extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 addEvent();
+            }
+        });
+        Weather.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String SDate = sDate.getText().toString().trim();
+                String EDate = eDate.getText().toString().trim();
+
+                WeatherCheck(SDate,EDate);
             }
         });
 
@@ -114,4 +146,178 @@ public class EventCreation extends AppCompatActivity {
             return true;
 
     }
+
+
+    public void WeatherCheck(final String StDate, final String EdDate){
+
+
+
+
+        String url = "https://api.apixu.com/v1/forecast.json?key=bc3127f6af2b4880a7d122952190803&q=Singapore&days=10";
+
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    List<Date> dates = getDates(StDate,EdDate);
+                    ArrayList<Date> rainDates = new ArrayList<>();
+                    ArrayList<Date> clearDates = new ArrayList<>();
+                    DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+                    String Result ="a";
+                    int rainCheck,dateCheck,clearNum;
+
+                    rainCheck = 0; dateCheck=0; clearNum=0;
+
+                    JSONObject outer = response.getJSONObject("forecast");
+                    JSONArray weather = outer.getJSONArray("forecastday");
+
+                    for(int i=0;i< weather.length();i++){
+                        JSONObject forecast = weather.getJSONObject(i);
+                        JSONObject day = forecast.getJSONObject("day");
+                        String checkDate = forecast.getString("date").trim();
+                        for(Date date:dates) {
+                           String varDate = df1.format(date);
+
+                           if(varDate.equals(checkDate)) {
+                               JSONObject Condition = day.getJSONObject("condition");
+                               String rain = Condition.getString("text").trim();
+                                    dateCheck=1;
+
+                               if (rain.contains("rain")) {
+                                   rainCheck = 1;
+                                   Date date1 = df1.parse(checkDate);
+                                   Calendar cal1 = Calendar.getInstance();
+                                   cal1.setTime(date1);
+                                   rainDates.add(cal1.getTime());
+
+
+
+                               }
+                               else{
+                                   Date date1= df1.parse(checkDate);
+                                   Calendar cal1 = Calendar.getInstance();
+                                   cal1.setTime(date1);
+                                   clearDates.add(cal1.getTime());
+                                   clearNum++;
+
+                               }
+
+
+                           }
+                        }
+                    }
+                    if(dateCheck == 0){
+                        Result = "Unable to forecast weather as date is too far ahead";
+                    }
+                    else if(rainCheck == 0) {
+                        Result = "Weather forecast shows no chance of rain";
+                    }
+                    else {
+                        String r ="";
+                        r += "Dates with chance of rain: \n";
+                        for(Date date:rainDates){
+
+                            r += df1.format(date) +" \n";
+                        }
+                        if(clearNum != 0) {
+                            r += " Dates without any chance of rain: \n";
+                            for (Date date : clearDates) {
+                                r += df1.format(date) + " \n";
+                            }
+                        }
+                        List<Date> unusedDates = removeAppearedDate(dates,rainDates,clearDates);
+                        if(unusedDates.size() !=0){
+                            r += "Dates too far ahead to forecast: \n";
+                            for(Date date : unusedDates){
+                                r += df1.format(date) + " \n";
+                            }
+                        }
+
+                        Result = r;
+                    }
+                    tvWeather.setText(Result);
+
+
+                }catch(JSONException e){
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }
+        );
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jor);
+     }
+
+
+
+     public static List<Date> getDates(String dateString1, String dateString2){
+        ArrayList<Date> dates = new ArrayList<>();
+        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = null;
+        Date date2 = null;
+
+        try{
+            date1 = df1.parse(dateString1);
+            date2 = df1.parse(dateString2);
+
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+
+        while(!cal1.after(cal2)){
+            dates.add(cal1.getTime());
+            cal1.add(Calendar.DATE,1);
+        }
+        return dates;
+     }
+     public static List<Date> removeAppearedDate(List<Date> o,List<Date> rain, List<Date> clear) throws ParseException {
+         ArrayList<Date> dates = new ArrayList<>();
+         int check = 0;
+        for(Date date:o){
+             check = 0;
+
+            for(Date rainDate:rain){
+
+                if(date.equals(rainDate)){
+                    check = 1;
+                }
+
+            }
+
+            for(Date clearDate:clear){
+
+                if(date.equals(clearDate)){
+                  check = 1;
+                }
+
+            }
+            if(check == 0)
+            {
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTime(date);
+                dates.add(cal1.getTime());
+            }
+        }
+
+        return dates;
+
+     }
+
+
 }
