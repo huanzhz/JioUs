@@ -1,13 +1,13 @@
 package com.jious.Model;
 
 public class Event {
-    private String eID, eName, eDes,eLocation,sDate, eDate, sTime, eTime, EUser_ID;
+    private String eID, eName, eDes,eLocation,sDate, eDate, sTime, eTime, eCreatorID, viewAccess;
 
     public Event(){
 
     }
 
-    public Event(String eID, String eName, String eDes, String eLocation, String sDate, String eDate, String sTime,  String eTime, String EUser_ID){
+    public Event(String eID, String eName, String eDes, String eLocation, String sDate, String eDate, String sTime,  String eTime, String eCreatorID,String viewAccess){
         this.eID = eID;
         this.eName = eName;
         this.eDes = eDes;
@@ -16,7 +16,8 @@ public class Event {
         this.eDate = eDate;
         this.sTime = sTime;
         this.eTime = eTime;
-        this.EUser_ID = EUser_ID;
+        this.eCreatorID = eCreatorID;
+        this.viewAccess = viewAccess;
     }
 
     public String geteID() {
@@ -50,7 +51,48 @@ public class Event {
     public String geteTime() {
         return eTime;
     }
-    public String getEUser_ID(){
-        return EUser_ID;
+    public String geteCreatorID(){
+        return eCreatorID;
+    }
+    public String getviewAccess(){ return viewAccess;}
+
+    public void seteID(String eID) {
+        this.eID = eID;
+    }
+
+    public void seteName(String eName) {
+        this.eName = eName;
+    }
+
+    public void seteDes(String eDes) {
+        this.eDes = eDes;
+    }
+
+    public void seteLocation(String eLocation) {
+        this.eLocation = eLocation;
+    }
+
+    public void setsDate(String sDate) {
+        this.sDate = sDate;
+    }
+
+    public void seteDate(String eDate) {
+        this.eDate = eDate;
+    }
+
+    public void setsTime(String sTime) {
+        this.sTime = sTime;
+    }
+
+    public void seteTime(String eTime) {
+        this.eTime = eTime;
+    }
+
+    public void seteCreatorID(String eCreatorID) {
+        this.eCreatorID = eCreatorID;
+    }
+
+    public void setViewAccess(String viewAccess) {
+        this.viewAccess = viewAccess;
     }
 }

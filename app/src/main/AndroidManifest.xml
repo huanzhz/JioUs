@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EventActivity.SubscriptionEventView"></activity>
+        <activity android:name=".EventActivity.SubscriberView" />
+        <activity android:name=".EventActivity.SubscriberListView" />
         <activity android:name=".ApiTest" />
         <activity android:name=".EventActivity.EventView" />
         <activity android:name=".EventActivity.EventCreation" />

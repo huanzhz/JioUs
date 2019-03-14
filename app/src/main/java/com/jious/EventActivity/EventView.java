@@ -49,7 +49,8 @@ public class EventView extends AppCompatActivity {
                     Event event = eventSnapshot.getValue(Event.class);
                     String SDate = event.getsDate();
                     String EDate = event.geteDate();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    String viewAccess = event.getviewAccess();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     Date Sdate = null, Edate = null;
                     try {
                          Sdate = sdf.parse(SDate);
@@ -59,13 +60,15 @@ public class EventView extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    //Condition to ensure that event has not pass current date
-                        if(System.currentTimeMillis() > Sdate.getTime())
-                            if(System.currentTimeMillis() <= Edate.getTime())
-                                eventList.add(event);
-                        else
-                          eventList.add(event);
-
+                    //Condition to ensure that event is meant for public instead of subscribed
+                        if(viewAccess == "Public") {
+                            //Condition to ensure that event has not pass current date
+                            if (System.currentTimeMillis() > Sdate.getTime())
+                                if (System.currentTimeMillis() <= Edate.getTime())
+                                    eventList.add(event);
+                                else
+                                    eventList.add(event);
+                        }
 
                 }
                 EventList adapter = new EventList(EventView.this, eventList);

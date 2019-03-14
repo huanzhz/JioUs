@@ -42,6 +42,7 @@ public class EventCreation extends AppCompatActivity {
     EditText eName,eDes,eLocation,sDate,sTime,eDate,eTime;
     TextView tvWeather;
     Button Create,Weather;
+    Switch Visibility;
 
 
      FirebaseUser fireUser;
@@ -64,6 +65,7 @@ public class EventCreation extends AppCompatActivity {
         tvWeather= (TextView) findViewById(R.id.textViewWeather);
         Create = (Button) findViewById(R.id.btn_create);
         Weather = (Button) findViewById(R.id.btn_weather);
+        Visibility = (Switch) findViewById(R.id.switch_vis);
 
 
 
@@ -95,6 +97,12 @@ public class EventCreation extends AppCompatActivity {
         String ETime = eTime.getText().toString().trim();
         String SDate = sDate.getText().toString().trim();
         String EDate = eDate.getText().toString().trim();
+        String Vis;
+        if (Visibility.isChecked()){
+            Vis = Visibility.getTextOn().toString();
+        }
+        else
+            Vis = Visibility.getTextOff().toString();
 
         fireUser = FirebaseAuth.getInstance().getCurrentUser();
         String User_ID = fireUser.getUid();
@@ -103,7 +111,7 @@ public class EventCreation extends AppCompatActivity {
         {
            String eventid = databaseEvent.push().getKey();
 
-            Event event = new Event(eventid,Name,Des,Location,SDate,EDate,STime,ETime,User_ID);
+            Event event = new Event(eventid,Name,Des,Location,SDate,EDate,STime,ETime,User_ID,Vis);
 
             databaseEvent.child(eventid).setValue(event);
             Toast.makeText(this,"Event added",Toast.LENGTH_LONG).show();
