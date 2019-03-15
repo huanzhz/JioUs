@@ -10,25 +10,25 @@
         android:id="@+id/tv_eventName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_eventDesc"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="253dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_eventDesc"
+        app:layout_constraintStart_toStartOf="@+id/tv_eventDesc"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_eventDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="126dp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_eventName"
-        app:layout_constraintStart_toStartOf="@+id/tv_eventName"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="39dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_eventName" />
 
     <TextView
         android:id="@+id/tv_eventVenue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="81dp"
         app:layout_constraintEnd_toStartOf="@+id/tv_eventDate"
         app:layout_constraintStart_toStartOf="@+id/tv_eventDate"
         app:layout_constraintTop_toBottomOf="@+id/tv_eventDesc" />
@@ -37,7 +37,7 @@
         android:id="@+id/tv_eventDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="21dp"
         app:layout_constraintEnd_toStartOf="@+id/tv_eventTime"
         app:layout_constraintStart_toStartOf="@+id/tv_eventTime"
         app:layout_constraintTop_toBottomOf="@+id/tv_eventVenue" />
@@ -46,8 +46,18 @@
         android:id="@+id/tv_eventTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="27dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_eventDate" />
+
+    <ImageView
+        android:id="@+id/eventImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 </android.support.constraint.ConstraintLayout>
