@@ -17,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jious.ApiTest;
 import com.jious.EventActivity.EventCreation;
+import com.jious.EventActivity.EventView;
 import com.jious.EventActivity.SubscriberList;
 import com.jious.EventActivity.SubscriberListView;
 import com.jious.EventActivity.SubscriptionEventView;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Auto login
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, SubscriberListView.class));
+            startActivity(new Intent(LoginActivity.this, EventView.class));
             finish();
         }
 
