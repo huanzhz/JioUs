@@ -22,6 +22,7 @@ import com.jious.EventActivity.SubscriberList;
 import com.jious.EventActivity.SubscriberListView;
 import com.jious.EventActivity.SubscriptionEventView;
 import com.jious.ProfileActivity2;
+import com.jious.ProfileActivity3;
 import com.jious.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Auto login
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, EventView.class));
+            startActivity(new Intent(LoginActivity.this, ProfileActivity3.class));
+            //startActivity(new Intent(LoginActivity.this, EventView.class));
             finish();
         }
 
@@ -104,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity2.class);
+                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity3.class);
                                     startActivity(intent);
                                     finish();
                                 }
