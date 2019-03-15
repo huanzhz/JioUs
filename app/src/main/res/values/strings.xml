@@ -51,4 +51,6 @@
     <string name="title_discover">Discover</string>
     <string name="title_chat">Chat</string>
     <string name="title_profile">Profile</string>
+    <string name="create_event">Create Event</string>
+
 </resources>
