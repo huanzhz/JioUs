@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -60,13 +61,21 @@ public class DiscoverFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
             Glide.with(mContext)
                     .asBitmap()
                     .load(mEventImageUris.get(i))
                     .into(viewHolder.civ_event_image);
 
             viewHolder.tv_event_name.setText(mEventNames.get(i));
+
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // TODO Implement on click listeners here
+                    Toast.makeText(mContext,   viewHolder.getAdapterPosition() +" clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
@@ -117,7 +126,7 @@ public class DiscoverFragment extends Fragment {
 
         Uri imageUri = Uri.parse("android.resource://com.jious/drawable/ic_launcher_background");
 
-        //TODO populate discover data from firebase
+        //TODO populate discover data from firebase here (or from onStart)
         for (int i = 0; i < 30; i++) {
             mImageUris.add(imageUri);
             mNames.add("test");
