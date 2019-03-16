@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/btn_createEvent"
         android:divider="@color/colorPrimary"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="2dp"/>
 
     <Button
         android:id="@+id/btn_createEvent"

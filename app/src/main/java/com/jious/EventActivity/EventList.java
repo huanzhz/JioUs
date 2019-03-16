@@ -36,8 +36,8 @@ public class EventList extends ArrayAdapter<Event> {
        // TextView textLocation = (TextView) listViewItem.findViewById(R.id.textLocation);
         TextView textSDate = (TextView) listViewItem.findViewById(R.id.textSDate);
         TextView textEDate = (TextView) listViewItem.findViewById(R.id.textEDate);
-        //TextView textSTime = (TextView) listViewItem.findViewById(R.id.textSTime);
-       // TextView textETime = (TextView) listViewItem.findViewById(R.id.textETime);
+        TextView textSTime = (TextView) listViewItem.findViewById(R.id.textSTime);
+        TextView textETime = (TextView) listViewItem.findViewById(R.id.textETime);
 
         Event event = eventList.get(position);
 
@@ -45,8 +45,8 @@ public class EventList extends ArrayAdapter<Event> {
       //  textLocation.setText(event.geteLocation());
         textSDate.setText(event.getsDate());
         textEDate.setText(event.geteDate());
-       // textSTime.setText(event.getsTime());
-       // textETime.setText("to "+event.geteTime());
+        textSTime.setText(event.getsTime());
+        textETime.setText("to "+event.geteTime());
 
         return listViewItem;
 
