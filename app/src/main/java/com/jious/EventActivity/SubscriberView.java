@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,8 +41,8 @@ public class SubscriberView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscriber_view);
-        tvSubName = (TextView) findViewById(R.id.tvSubName);
-        subEvent = (ListView) findViewById(R.id.listview_subEvent);
+        tvSubName = (TextView) findViewById(R.id.tv_sub_name);
+        subEvent = (ListView) findViewById(R.id.listview_sub_event);
         sub = (Button) findViewById(R.id.btn_sub);
         fireUser = FirebaseAuth.getInstance().getCurrentUser();
         User_ID = fireUser.getUid();

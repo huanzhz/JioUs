@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.jious.EventActivity.EventCreation;
 import com.jious.EventActivity.EventDetailView;
 import com.jious.EventActivity.EventList;
-import com.jious.EventActivity.EventView;
 import com.jious.Model.Event;
 import com.jious.Model.Subscriber;
 import com.jious.Model.User;
@@ -43,7 +42,7 @@ public class HomeFragment extends Fragment {
     List<Subscriber> subList;
     FirebaseUser fireUser;
     String User_ID;
-    Button create;
+    FloatingActionButton create;
 
     @Nullable
     @Override
@@ -68,21 +67,22 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fireUser = FirebaseAuth.getInstance().getCurrentUser();
                 User_ID = fireUser.getUid();
-                create = getActivity().findViewById(R.id.btn_createEvent);
-                for(DataSnapshot user : dataSnapshot.getChildren()){
-                    User cUser = user.getValue(User.class);
-                    String userID = cUser.getId();
-                    Long eCreator = cUser.geteCreator();
-                    if(userID.equals(User_ID) && eCreator == 1){
-                        create.setVisibility(View.VISIBLE);
-                        create.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                Intent i = new Intent(getActivity(), EventCreation.class);
-                                startActivity(i);
-                            }
-                        });
+                if (isAdded()) {
+                    create = getActivity().findViewById(R.id.btn_createEvent);
+                    for (DataSnapshot user : dataSnapshot.getChildren()) {
+                        User cUser = user.getValue(User.class);
+                        String userID = cUser.getId();
+                        Long eCreator = cUser.geteCreator();
+                        if (userID.equals(User_ID) && eCreator == 1) {
+                            create.show();
+                            create.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(getActivity(), EventCreation.class);
+                                    startActivity(i);
+                                }
+                            });
+                        }
                     }
                 }
             }

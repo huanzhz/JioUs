@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/toolbarJious"
+            android:id="@+id/toolbar_jious"
             layout="@layout/toolbar_layout"/>
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:layout_below="@+id/toolbarJious"
+            android:layout_below="@+id/toolbar_jious"
             android:layout_centerHorizontal="true"
             tools:srcCompat="@tools:sample/avatars" />
 

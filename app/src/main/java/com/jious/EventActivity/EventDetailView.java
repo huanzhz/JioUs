@@ -46,7 +46,7 @@ public class EventDetailView extends AppCompatActivity {
                     Event event = eventSS.getValue(Event.class);
                     String check = event.geteID();
                     if(EventID.equals(check)){
-                        eName.setText("Name ; "+event.geteName());
+                        eName.setText("Name : "+event.geteName());
                         eDes.setText("Description : "+ event.geteDes());
                         eLocation.setText("Venue : " + event.geteLocation());
                         eDate.setText("Date : " +event.getsDate() + " - " + event.geteDate());
