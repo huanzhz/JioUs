@@ -12,7 +12,7 @@
         android:layout_height="fill_parent" >
 
         <include
-            android:id="@+id/toolbarEvent"
+            android:id="@+id/toolbarJious"
             layout="@layout/toolbar_layout"/>
 
     <TextView
@@ -23,7 +23,7 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_below="@+id/toolbarEvent"
+        android:layout_below="@+id/toolbarJious"
         android:layout_centerHorizontal="true"
         />
 

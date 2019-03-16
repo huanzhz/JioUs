@@ -16,9 +16,15 @@
         <activity
             android:name=".ProfileActivity3"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
-        <activity android:name=".EventActivity.EventDetailView"></activity>
+        <activity
+            android:name=".EventActivity.EventDetailView"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
         <activity android:name=".EventActivity.SubscriptionEventView" />
-        <activity android:name=".EventActivity.SubscriberView" />
+        <activity
+            android:name=".EventActivity.SubscriberView"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".EventActivity.SubscriberListView" />
         <activity android:name=".ApiTest" />
         <activity android:name=".EventActivity.EventView" />
