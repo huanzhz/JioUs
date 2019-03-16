@@ -131,6 +131,7 @@ public class EventView extends AppCompatActivity {
                             }
 
                         }
+
                         EventList adapter = new EventList(EventView.this, eventList);
                         listViewEvents.setAdapter(adapter);
                         listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {

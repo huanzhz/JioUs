@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
                         create.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 Intent i = new Intent(getActivity(), EventCreation.class);
                                 startActivity(i);
                             }
@@ -174,22 +175,24 @@ public class HomeFragment extends Fragment {
                             }
 
                         }
-                        EventList adapter = new EventList(getActivity(), eventList);
-                        listViewEvents = (ListView) getActivity().findViewById(R.id.fragListViewEvent);
-                        listViewEvents.setAdapter(adapter);
-                        listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String eventID;
-                                Event event = eventList.get(position);
-                                eventID = event.geteID();
-                                eventList.clear();
-                                Intent i = new Intent(getActivity(), EventDetailView.class);
-                                i.putExtra("EventID",eventID);
-                                startActivity(i);
+                       if(getActivity()!=null) {
+                           EventList adapter = new EventList(getActivity(), eventList);
+                           listViewEvents = (ListView) getActivity().findViewById(R.id.fragListViewEvent);
+                           listViewEvents.setAdapter(adapter);
+                           listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                               @Override
+                               public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                   String eventID;
+                                   Event event = eventList.get(position);
+                                   eventID = event.geteID();
+                                   eventList.clear();
+                                   Intent i = new Intent(getActivity(), EventDetailView.class);
+                                   i.putExtra("EventID", eventID);
+                                   startActivity(i);
 
-                            }
-                        });
+                               }
+                           });
+                       }
 
                     }
 

@@ -70,9 +70,7 @@ public class SubscriberListView extends AppCompatActivity {
                         startActivity(i);
                         finish();
                     }
-                                                          }
-
-                );
+                });
 
             }
 
