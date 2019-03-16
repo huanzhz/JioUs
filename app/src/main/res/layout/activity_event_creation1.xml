@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventActivity.EventCreation">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <include
+            android:id="@+id/toolbarEvent"
+            layout="@layout/toolbar_layout"/>
+
+    <TextView
+        android:id="@+id/eventCreation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/event_creation"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/toolbarEvent"
+        android:layout_centerHorizontal="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/nameRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eventCreation">
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/event_name" />
+
+        <EditText
+            android:id="@+id/text_eName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_toRightOf="@+id/textViewName"
+            android:layout_toEndOf="@+id/textViewName"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weather Check"
+        android:layout_below="@id/nameRelative"
+        />
+
+    <RelativeLayout
+        android:id="@+id/eventRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_weather">
+
+        <TextView
+            android:id="@+id/textViewEventDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/event_description"
+            />
+
+        <EditText
+            android:id="@+id/text_eDes"
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            android:ems="10"
+            android:layout_toRightOf="@+id/textViewEventDescription"
+            android:layout_toEndOf="@+id/textViewEventDescription"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/locationRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eventRelative">
+
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            />
+
+        <EditText
+            android:id="@+id/text_eLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:layout_toRightOf="@+id/textViewLocation"
+            android:layout_toEndOf="@+id/textViewLocation"
+            android:inputType="textPersonName"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/startDateRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locationRelative">
+
+        <TextView
+            android:id="@+id/textViewStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_date"
+            />
+
+        <EditText
+            android:id="@+id/text_sDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="YYYY-MM-DD"
+            android:importantForAutofill="no"
+            android:layout_toRightOf="@+id/textViewStartDate"
+            android:layout_toEndOf="@+id/textViewStartDate"
+            android:inputType="date"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/EndTimeRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startDateRelative">
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/EndDateRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EndTimeRelative">
+
+        <TextView
+            android:id="@+id/textViewEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_date"
+            />
+
+        <EditText
+            android:id="@+id/text_eDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="YYYY-MM-DD"
+            android:importantForAutofill="no"
+            android:layout_toRightOf="@+id/textViewEndDate"
+            android:layout_toEndOf="@+id/textViewEndDate"
+            android:inputType="date"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/startTimeRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EndDateRelative">
+
+        <TextView
+            android:id="@+id/textViewStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_time"
+            />
+
+        <EditText
+            android:id="@+id/text_sTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:layout_toRightOf="@+id/textViewStartTime"
+            android:layout_toEndOf="@+id/textViewStartTime"
+            android:inputType="time"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/endTimeRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startTimeRelative">
+
+        <TextView
+            android:id="@+id/textViewEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_time"/>
+
+        <EditText
+            android:id="@+id/text_eTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:layout_toRightOf="@+id/textViewEndTime"
+            android:layout_toEndOf="@+id/textViewEndTime"
+            android:inputType="time"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/visibleRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/endTimeRelative">
+
+        <Switch
+            android:id="@+id/switch_vis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:showText="true"
+            android:text="Visibility"
+            android:textOff="Subscribed"
+            android:textOn="Public"
+            android:layout_centerHorizontal="true"
+            tools:checked="false" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/create"
+        android:layout_below="@+id/visibleRelative"
+        android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</ScrollView>
