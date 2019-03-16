@@ -9,10 +9,12 @@
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
         android:text="Event Name"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        />
+        android:textSize="30sp" />
 
 
     <TextView
@@ -21,27 +23,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textName"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="13dp"
         android:text="Start Date"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        />
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <TextView
         android:id="@+id/tv_to"
-        android:text=" to "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textName"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="13dp"
         android:layout_toEndOf="@id/textSDate"
+        android:text=" to "
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <TextView
         android:id="@+id/textEDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date"
         android:layout_below="@+id/textName"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="13dp"
         android:layout_toEndOf="@id/tv_to"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        />
+        android:text="End Date"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
 
 </RelativeLayout>
