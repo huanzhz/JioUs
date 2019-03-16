@@ -5,17 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
     <RelativeLayout
-        android:layout_width="311dp"
-        android:layout_height="match_parent">
-
-
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
 
     <TextView
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="0dp"
         android:text="Event Name"
@@ -24,56 +26,55 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textSize="24dp" />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textName">
 
-    <TextView
-        android:id="@+id/textSDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textName"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="13dp"
-        android:text="Start Date"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <TextView
+                android:id="@+id/textSDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="13dp"
+                android:text="Start Date"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/tv_to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textName"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="13dp"
-        android:layout_toEndOf="@id/textSDate"
-        android:text=" to "
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <TextView
+                android:id="@+id/tv_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="13dp"
+                android:layout_toEndOf="@id/textSDate"
+                android:text=" to "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/textEDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textName"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="13dp"
-        android:layout_toEndOf="@id/tv_to"
-        android:text="End Date"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <TextView
+                android:id="@+id/textEDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="13dp"
+                android:layout_toEndOf="@id/tv_to"
+                android:text="End Date"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        </RelativeLayout>
+
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="311dp"
-        android:layout_marginTop="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1"
         android:background="@color/bg_alt">
 
         <TextView
             android:id="@+id/textSTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
             android:text="Start Time"
             android:textSize="22sp" />
 
@@ -81,12 +82,12 @@
             android:id="@+id/textETime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="68dp"
+            android:layout_below="@+id/textSTime"
             android:text="End Time"
+            android:layout_centerHorizontal="true"
             android:textSize="18sp" />
     </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
