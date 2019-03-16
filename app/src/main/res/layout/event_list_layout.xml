@@ -5,12 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Event Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        />
+
 
     <TextView
         android:id="@+id/textSDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textName"
+        android:layout_marginStart="20dp"
         android:text="Start Date"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         />
@@ -31,14 +41,6 @@
         android:text="End Date"
         android:layout_below="@+id/textName"
         android:layout_toEndOf="@id/tv_to"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        />
-
-    <TextView
-        android:id="@+id/textName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Event Name"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         />
 
