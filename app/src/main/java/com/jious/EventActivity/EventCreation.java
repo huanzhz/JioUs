@@ -116,7 +116,11 @@ public class EventCreation extends AppCompatActivity {
 
             databaseEvent.child(eventid).setValue(event);
             Toast.makeText(this,"Event added",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(EventCreation.this, EventView.class));
+            Intent i = new Intent(EventCreation.this, EventDetailView.class);
+            i.putExtra("EventID",eventid);
+            startActivity(i);
+
+
         }
 
     }
