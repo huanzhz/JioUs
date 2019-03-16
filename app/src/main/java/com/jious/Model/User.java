@@ -7,6 +7,7 @@ public class User {
     private String imageURL;
     private String status;
     private String search;
+    private Long eCreator;
 
     public User(String id, String username, String imageURL, String status, String search){
         this.id = id;
@@ -14,6 +15,15 @@ public class User {
         this.imageURL = imageURL;
         this.status = status;
         this.search = search;
+    }
+
+    public User(String id, String username, String imageURL, String status, String search, Long eCreator){
+        this.id = id;
+        this.username = username;
+        this.imageURL = imageURL;
+        this.status = status;
+        this.search = search;
+        this.eCreator = eCreator;
     }
 
     public User(){
@@ -59,4 +69,10 @@ public class User {
     public void setSearch(String search) {
         this.search = search;
     }
+
+    public void seteCreator(Long eCreator){ this.eCreator= eCreator;}
+
+    public Long geteCreator(){ return eCreator;}
+
+
 }
