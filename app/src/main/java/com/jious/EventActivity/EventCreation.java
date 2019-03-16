@@ -112,7 +112,7 @@ public class EventCreation extends AppCompatActivity {
         {
            String eventid = databaseEvent.push().getKey();
 
-            Event event = new Event(eventid,Name,Des,Location,SDate,EDate,STime,ETime,User_ID,Vis);
+            Event event = new Event(eventid,Name,Des,Location,SDate,EDate,STime,ETime,User_ID,Vis,"default");
 
             databaseEvent.child(eventid).setValue(event);
             Toast.makeText(this,"Event added",Toast.LENGTH_LONG).show();
