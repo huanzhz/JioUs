@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventActivity.SubscriptionEventView"></activity>
+        <activity
+            android:name=".ProfileActivity3"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <activity android:name=".EventActivity.EventDetailView"></activity>
+        <activity android:name=".EventActivity.SubscriptionEventView" />
         <activity android:name=".EventActivity.SubscriberView" />
         <activity android:name=".EventActivity.SubscriberListView" />
         <activity android:name=".ApiTest" />

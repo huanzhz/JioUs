@@ -49,4 +49,14 @@
     <string name="end_time">End Time:</string>
     <string name="create">Create</string>
     <string name="event_creation">Event Creation</string>
+    <string name="title_activity_profile3">profileActivity3</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_discover">Discover</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_profile">Profile</string>
+    <string name="create_event">Create Event</string>
+
 </resources>
