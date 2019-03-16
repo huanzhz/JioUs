@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -83,6 +84,19 @@ public class SubscriberView extends AppCompatActivity {
 
                 EventList adapter = new EventList(SubscriberView.this, eventList);
                 subEvent.setAdapter(adapter);
+                subEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String eventID;
+                        Event event = eventList.get(position);
+                        eventID = event.geteID();
+                        eventList.clear();
+                        Intent i = new Intent(SubscriberView.this, EventDetailView.class);
+                        i.putExtra("EventID",eventID);
+                        startActivity(i);
+
+                    }
+                });
             }
 
             @Override
