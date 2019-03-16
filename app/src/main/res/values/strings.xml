@@ -34,4 +34,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_home_title">home</string>
+    <string name="action_search_title">search</string>
+    <string name="action_chat_title">chat</string>
+    <string name="action_profile_title">my profile</string>
 </resources>
