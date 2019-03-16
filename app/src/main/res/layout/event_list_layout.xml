@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="TextView"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="125dp" />
 
     <TextView
         android:id="@+id/textSDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="Start Date"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="277dp" />
+        />
 
     <TextView
         android:id="@+id/textEDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="End Date"
+        android:layout_below="@+id/textSDate"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="277dp"
-        tools:layout_editor_absoluteY="65dp" />
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textEDate"
+        android:text="Event Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        />
+
+</RelativeLayout>

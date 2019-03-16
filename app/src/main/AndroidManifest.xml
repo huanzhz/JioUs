@@ -22,7 +22,9 @@
         <activity android:name=".EventActivity.SubscriberListView" />
         <activity android:name=".ApiTest" />
         <activity android:name=".EventActivity.EventView" />
-        <activity android:name=".EventActivity.EventCreation" />
+        <activity
+            android:name=".EventActivity.EventCreation"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".AccountActivity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
