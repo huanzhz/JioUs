@@ -50,19 +50,11 @@
             />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btn_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weather Check"
-        android:layout_below="@id/nameRelative"
-        />
-
     <RelativeLayout
         android:id="@+id/eventRelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_weather">
+        android:layout_below="@+id/nameRelative">
 
         <TextView
             android:id="@+id/textViewEventDescription"
@@ -224,11 +216,35 @@
             />
     </RelativeLayout>
 
+
+        <RelativeLayout
+            android:id="@+id/weatherRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/endTimeRelative">
+
+            <Button
+                android:id="@+id/btn_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weather Check"
+                />
+
+            <TextView
+                android:id="@+id/textViewWeather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_below="@+id/btn_weather"
+                />
+
+        </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/visibleRelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/endTimeRelative">
+        android:layout_below="@+id/weatherRelative">
 
         <Switch
             android:id="@+id/switch_vis"
