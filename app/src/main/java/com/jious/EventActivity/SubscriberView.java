@@ -155,14 +155,14 @@ public class SubscriberView extends AppCompatActivity {
             Subscriber subscriber = new Subscriber(subID,SID,User_ID);
             databaseSub.child(subID).setValue(subscriber);
             sub.setText("Unsubscribe");
-            Toast.makeText(this,"Subscribed",Toast.LENGTH_LONG).show();
+           // Toast.makeText(this,"Subscribed",Toast.LENGTH_LONG).show();
 
 
         }
         else {
         databaseSub.child(SubscriptionID).removeValue();
         sub.setText("Subscribe");
-            Toast.makeText(this,"Unsubscribed",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"Unsubscribed",Toast.LENGTH_LONG).show();
 
         }
     }

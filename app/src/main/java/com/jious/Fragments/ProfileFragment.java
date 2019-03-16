@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +33,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.jious.EventActivity.SubscriberList;
+import com.jious.EventActivity.SubscriberListView;
+import com.jious.EventActivity.SubscriberView;
+import com.jious.Model.Subscriber;
 import com.jious.Model.User;
 import com.jious.R;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,13 +55,16 @@ public class ProfileFragment extends Fragment {
     CircleImageView image_profie;
     TextView username;
 
-    DatabaseReference reference;
-    FirebaseUser fuser;
-
+    DatabaseReference reference,databaseSub,databaseUser;
+    FirebaseUser fuser,fireUser;
+    String User_ID;
     StorageReference storageReference;
     private static final int IMAGE_REQUEST = 1;
     private Uri imageUri;
     private StorageTask uploadTask;
+    List<Subscriber> subList;
+    List<User> userList;
+    ListView listViewSubscriber;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,9 +73,12 @@ public class ProfileFragment extends Fragment {
 
         image_profie = view.findViewById(R.id.profile_image);
         username = view.findViewById(R.id.username);
-
+        subList = new ArrayList<>();
+        userList = new ArrayList<>();
+        listViewSubscriber = view.findViewById(R.id.listViewSubList);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
-
+        databaseSub = FirebaseDatabase.getInstance().getReference("Subscriber");
+        databaseUser = FirebaseDatabase.getInstance().getReference("Users");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
@@ -172,5 +186,81 @@ public class ProfileFragment extends Fragment {
                 uploadImage();
             }
         }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        databaseSub.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                subList.clear();
+                for(DataSnapshot sub : dataSnapshot.getChildren()){
+                    Subscriber subscriber = sub.getValue(Subscriber.class);
+                    String userID = subscriber.getUserID();
+                    fireUser = FirebaseAuth.getInstance().getCurrentUser();
+                    User_ID = fireUser.getUid();
+                    if(userID.equals(User_ID)){
+                        subList.add(subscriber);
+                    }
+
+                }
+                databaseUser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        userList.clear();
+                        for(DataSnapshot Sub : dataSnapshot.getChildren()){
+                            User user = Sub.getValue(User.class);
+                            int size, i;
+                            String userID = user.getId();
+                            size = subList.size();
+                            for(i = 0; i<size; i++){
+                                Subscriber subC = subList.get(i);
+                                String check = subC.geteCreatorID();
+                                if(userID.equals(check)){
+                                    userList.add(user);
+                                }
+                            }
+
+
+                        }
+                        if(getActivity()!=null) {
+                            SubscriberList adapter = new SubscriberList(getActivity(), userList);
+                            listViewSubscriber.setAdapter(adapter);
+
+                            listViewSubscriber.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adpaterView, View view, int position, long id) {
+                                    String subID;
+                                    User sub = userList.get(position);
+                                    subID = sub.getId();
+                                    Intent i = new Intent(getActivity(), SubscriberView.class);
+                                    i.putExtra("SubscriberID", subID);
+                                    startActivity(i);
+
+                                }
+                            });
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
