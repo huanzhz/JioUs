@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +39,7 @@ public class SubscriberView extends AppCompatActivity {
     List<Subscriber> subList;
     List<User> userList;
     String SID,User_ID,SubscriptionID;
-
+    ImageView image_User;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class SubscriberView extends AppCompatActivity {
         tvSubName = (TextView) findViewById(R.id.tv_sub_name);
         subEvent = (ListView) findViewById(R.id.listview_sub_event);
         sub = (Button) findViewById(R.id.btn_sub);
+        image_User = (ImageView) findViewById(R.id.sub_profile);
         fireUser = FirebaseAuth.getInstance().getCurrentUser();
         User_ID = fireUser.getUid();
         Intent i =this.getIntent();
@@ -135,6 +139,12 @@ public class SubscriberView extends AppCompatActivity {
                     if(userID.equals(SID)){
                         String name = user.getUsername();
                         tvSubName.setText(name);
+                        if(user.getImageURL().equals("default")){
+                            image_User.setImageResource(R.mipmap.ic_launcher);
+                        }
+                        else{
+                            Glide.with(SubscriberView.this).load(user.getImageURL()).into(image_User);
+                        }
                     }
                 }
             }
@@ -154,14 +164,14 @@ public class SubscriberView extends AppCompatActivity {
             Subscriber subscriber = new Subscriber(subID,SID,User_ID);
             databaseSub.child(subID).setValue(subscriber);
             sub.setText("Unsubscribe");
-           // Toast.makeText(this,"Subscribed",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Subscribed",Toast.LENGTH_LONG).show();
 
 
         }
         else {
         databaseSub.child(SubscriptionID).removeValue();
         sub.setText("Subscribe");
-            //Toast.makeText(this,"Unsubscribed",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Unsubscribed",Toast.LENGTH_LONG).show();
 
         }
     }

@@ -25,6 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Title name"
+        android:textStyle="bold"
+        android:textColor="@color/colorComplementary"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/sub_profile" />

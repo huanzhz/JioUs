@@ -87,6 +87,9 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
+                if(user.geteCreator() == 1){
+                    username.setTextColor(getActivity().getResources().getColor(R.color.colorComplementary));
+                }
                 if(user.getImageURL().equals("default")){
                     image_profie.setImageResource(R.mipmap.ic_launcher);
                 } else {
