@@ -68,21 +68,23 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fireUser = FirebaseAuth.getInstance().getCurrentUser();
                 User_ID = fireUser.getUid();
-                create = getActivity().findViewById(R.id.btn_createEvent);
-                for(DataSnapshot user : dataSnapshot.getChildren()){
-                    User cUser = user.getValue(User.class);
-                    String userID = cUser.getId();
-                    Long eCreator = cUser.geteCreator();
-                    if(userID.equals(User_ID) && eCreator == 1){
-                        create.setVisibility(View.VISIBLE);
-                        create.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                if (isAdded()) {
+                    create = getActivity().findViewById(R.id.btn_createEvent);
+                    for (DataSnapshot user : dataSnapshot.getChildren()) {
+                        User cUser = user.getValue(User.class);
+                        String userID = cUser.getId();
+                        Long eCreator = cUser.geteCreator();
+                        if (userID.equals(User_ID) && eCreator == 1) {
+                            create.setVisibility(View.VISIBLE);
+                            create.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
-                                Intent i = new Intent(getActivity(), EventCreation.class);
-                                startActivity(i);
-                            }
-                        });
+                                    Intent i = new Intent(getActivity(), EventCreation.class);
+                                    startActivity(i);
+                                }
+                            });
+                        }
                     }
                 }
             }
