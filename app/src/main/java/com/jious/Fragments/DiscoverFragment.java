@@ -3,6 +3,7 @@ package com.jious.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -68,6 +69,9 @@ public class DiscoverFragment extends Fragment {
                     .into(viewHolder.civ_user_image);
 
             viewHolder.tv_user_name.setText(mUserNames.get(i));
+            viewHolder.tv_user_name.setTextColor(getActivity().getResources().getColor(R.color.colorComplementary));
+            viewHolder.tv_user_name.setTypeface(null, Typeface.BOLD);
+            viewHolder.tv_user_name.setTextSize(24);
 
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

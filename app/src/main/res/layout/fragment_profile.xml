@@ -40,7 +40,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:id="@+id/username"
-                android:textSize="18sp"/>
+                android:textSize="24sp"/>
 
         </RelativeLayout>
 
