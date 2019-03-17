@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F2f2f2">
 
         <include
             android:id="@+id/toolbar_jious"
@@ -23,52 +24,191 @@
             android:layout_centerHorizontal="true"
             android:src="@mipmap/ic_launcher"
             />
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/eventImage"
+    android:id="@+id/partition"
+    android:background="@color/white">
+
 
         <TextView
-            android:id="@+id/tv_eventName"
+            android:id="@+id/details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Event Name"
+            android:text="@string/event_details"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/eventImage"/>
-
-        <TextView
-            android:id="@+id/tv_eventDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Event Description"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tv_eventName" />
-
-        <TextView
-            android:id="@+id/tv_eventVenue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Event Venue"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tv_eventDesc" />
-
-        <TextView
-            android:id="@+id/tv_eventDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Event Date"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tv_eventVenue"
             />
-
-        <TextView
-            android:id="@+id/tv_eventTime"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/nameRelative"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Event Time"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tv_eventDate" />
+            android:layout_below="@+id/details"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorSecondary"/>
+
+            <TextView
+                android:id="@+id/tv_eventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_toRightOf="@+id/textViewName"
+                android:layout_toEndOf="@+id/textViewName"
+                android:importantForAutofill="no"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginLeft="55dp"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/eventRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameRelative"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textViewEventDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:layout_centerVertical="true"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorSecondary"
+                />
+
+            <TextView
+                android:id="@+id/tv_eventDesc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:layout_toRightOf="@+id/textViewEventDescription"
+                android:layout_toEndOf="@+id/textViewEventDescription"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/locationRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventRelative"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textViewLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/location"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorSecondary"
+                />
+
+            <TextView
+                android:id="@+id/tv_eventVenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/textViewLocation"
+                android:layout_toEndOf="@+id/textViewLocation"
+                android:textSize="18dp"
+                android:layout_marginLeft="33dp"
+
+
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/startDateRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/locationRelative"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textViewStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorSecondary"
+                />
+
+            <TextView
+                android:id="@+id/tv_eventDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/textViewStartDate"
+                android:layout_toEndOf="@+id/textViewStartDate"
+                android:inputType="date"
+                android:textSize="18dp"
+                android:layout_marginLeft="65dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/EndDateRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/startDateRelative"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textViewEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Time"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorSecondary"
+                />
+
+            <TextView
+                android:id="@+id/tv_eventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/textViewEndDate"
+                android:layout_toEndOf="@+id/textViewEndDate"
+                android:textSize="18dp"
+                android:layout_marginLeft="61dp"
+
+                />
+
+        </RelativeLayout>
+</RelativeLayout>
+
 
     </RelativeLayout>
 

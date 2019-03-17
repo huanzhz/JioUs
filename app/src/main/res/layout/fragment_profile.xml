@@ -43,7 +43,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:id="@+id/username"
-                android:textSize="24sp"/>
+                android:textSize="30dp"/>
 
         </RelativeLayout>
 
@@ -61,7 +61,9 @@
             android:gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_marginTop="10dp"
-            android:text="Subscription List" />
+            android:text="Subscription List"
+            android:textStyle="bold"
+           />
 
         <ListView
             android:id="@+id/listViewSubList"

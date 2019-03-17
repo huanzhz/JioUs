@@ -52,5 +52,10 @@
     <string name="title_chat">Chat</string>
     <string name="title_profile">Profile</string>
     <string name="create_event">Create Event</string>
+    <string name="date">Date:</string>
+    <string name="Time">Time:</string>
+    <string name="event_details">Event Details</string>
+    <string name="name">Name:</string>
+    <string name="description">Description:</string>
 
 </resources>

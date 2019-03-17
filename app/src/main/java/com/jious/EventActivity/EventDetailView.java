@@ -156,11 +156,11 @@ public class EventDetailView extends AppCompatActivity {
                     event = eventSS.getValue(Event.class);
                     String check = event.geteID();
                     if(EventID.equals(check)) {
-                        eName.setText("Name ; " + event.geteName());
-                        eDes.setText("Description : " + event.geteDes());
-                        eLocation.setText("Venue : " + event.geteLocation());
-                        eDate.setText("Date : " + event.getsDate() + " - " + event.geteDate());
-                        eTime.setText(("Time : " + event.getsTime() + " - " + event.geteTime()));
+                        eName.setText(event.geteName());
+                        eDes.setText(event.geteDes());
+                        eLocation.setText(event.geteLocation());
+                        eDate.setText( event.getsDate() + " - " + event.geteDate());
+                        eTime.setText((event.getsTime() + " - " + event.geteTime()));
                         // Get the image
                         if (event.getImageURL().equals("default")) {
                             image_Event.setImageResource(R.mipmap.ic_launcher);
