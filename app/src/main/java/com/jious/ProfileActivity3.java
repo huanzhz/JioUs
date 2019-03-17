@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.jious.AccountActivity.LoginActivity;
 import com.jious.Fragments.ChatsFragment;
 import com.jious.Fragments.DiscoverFragment;
+import com.jious.Fragments.GroupChatFragment;
 import com.jious.Fragments.HomeFragment;
 import com.jious.Fragments.ProfileFragment;
 
@@ -58,7 +59,7 @@ public class ProfileActivity3 extends AppCompatActivity implements BottomNavigat
                 break;
 
             case R.id.navigation_chat:
-                fragment = new ChatsFragment();
+                fragment = new GroupChatFragment();
                 break;
 
             case R.id.navigation_profile:
