@@ -46,7 +46,7 @@ public class EventCreation extends AppCompatActivity {
 
 
      FirebaseUser fireUser;
-    private DatabaseReference databaseEvent;
+    private DatabaseReference databaseEvent, RootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class EventCreation extends AppCompatActivity {
         setContentView(R.layout.activity_event_creation1);
 
         databaseEvent = FirebaseDatabase.getInstance().getReference("Event");
+        RootRef = FirebaseDatabase.getInstance().getReference();
 
         eName = (EditText) findViewById(R.id.text_eName);
         eDes = (EditText) findViewById(R.id.text_eDes);

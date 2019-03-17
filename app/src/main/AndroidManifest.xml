@@ -14,23 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".GroupChatActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".ProfileActivity3"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EventActivity.EventDetailView"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".EventActivity.SubscriptionEventView" />
         <activity
             android:name=".EventActivity.SubscriberView"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".EventActivity.SubscriberListView" />
         <activity android:name=".ApiTest" />
         <activity android:name=".EventActivity.EventView" />
         <activity
             android:name=".EventActivity.EventCreation"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AccountActivity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
