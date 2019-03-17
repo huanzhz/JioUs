@@ -85,7 +85,7 @@ public class SubscriberView extends AppCompatActivity {
                     }
                 }
 
-                EventList adapter = new EventList(SubscriberView.this, eventList);
+                EventListS adapter = new EventListS(SubscriberView.this, eventList);
                 subEvent.setAdapter(adapter);
                 subEvent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

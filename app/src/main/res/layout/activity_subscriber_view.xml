@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventActivity.SubscriberView">
+    tools:context=".EventActivity.SubscriberView"
+    android:background="#F2f2f2">
 
     <include
         android:id="@+id/toolbar_jious"
@@ -40,11 +41,16 @@
         android:layout_below="@+id/tv_sub_name"
         android:layout_centerHorizontal="true"
         />
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/btn_sub"
+    android:background="@color/white">
     <ListView
         android:id="@+id/listview_sub_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/btn_sub"/>
+
+       />
+</RelativeLayout>
 </RelativeLayout>

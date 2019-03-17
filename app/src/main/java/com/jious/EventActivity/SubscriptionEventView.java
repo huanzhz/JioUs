@@ -41,8 +41,8 @@ public class SubscriptionEventView extends AppCompatActivity {
         databaseEvent = FirebaseDatabase.getInstance().getReference("Event");
         databaseSub = FirebaseDatabase.getInstance().getReference("Subscriber");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_view);
-        listViewEvents = (ListView) findViewById(R.id.listViewEvent);
+        setContentView(R.layout.activity_subscription_event_view);
+        listViewEvents = (ListView) findViewById(R.id.listViewEventS);
         fireUser = FirebaseAuth.getInstance().getCurrentUser();
         User_ID = fireUser.getUid();
         eventList = new ArrayList<>();
