@@ -186,15 +186,9 @@ public class EventCreation extends AppCompatActivity {
             if(results == false){
                 return false;
             }
-            else {
-                if (startDate.compareTo(endDate) <= 0)
-                    return true;
-                else {
-                    Toast.makeText(this, "End Date is before Start Date", Toast.LENGTH_LONG).show();
-                    return false;
-                }
+            else{
+                return true;
             }
-
 
         }
 
@@ -203,8 +197,22 @@ public class EventCreation extends AppCompatActivity {
 
     public boolean checkDate(String StDate, String EdDate) {
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate,endDate;
+        try {
+            startDate = dateFormat.parse(StDate);
+            endDate = dateFormat.parse(EdDate);
+        } catch (ParseException e) {
+            Toast.makeText(this,"You should enter a valid Date", Toast.LENGTH_LONG).show();
+            return false;
+        }
         if(StDate.matches("^\\d{4}-\\d{2}-\\d{2}$") && EdDate.matches("^\\d{4}-\\d{2}-\\d{2}$"))
-            return true;
+            if (startDate.compareTo(endDate) <= 0)
+                return true;
+            else {
+                Toast.makeText(this, "End Date is before Start Date", Toast.LENGTH_LONG).show();
+                return false;
+            }
         else
             Toast.makeText(this,"You should enter a valid Date", Toast.LENGTH_LONG).show();
         return false;
