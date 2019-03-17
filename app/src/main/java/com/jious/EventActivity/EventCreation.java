@@ -40,7 +40,7 @@ import java.util.List;
 public class EventCreation extends AppCompatActivity {
 
     EditText eName,eDes,eLocation,sDate,sTime,eDate,eTime;
-    TextView tvWeather;
+
     Button Create,Weather;
     Switch Visibility;
 
@@ -64,7 +64,7 @@ public class EventCreation extends AppCompatActivity {
         eDate= (EditText) findViewById(R.id.text_eDate);
         sTime = (EditText) findViewById(R.id.text_sTime);
         eTime = (EditText) findViewById(R.id.text_eTime);
-        tvWeather= (TextView) findViewById(R.id.textViewWeather);
+
         Create = (Button) findViewById(R.id.btn_create);
         Weather = (Button) findViewById(R.id.btn_weather);
         Visibility = (Switch) findViewById(R.id.switch_vis);
@@ -82,8 +82,14 @@ public class EventCreation extends AppCompatActivity {
             public void onClick(View view){
                 String SDate = sDate.getText().toString().trim();
                 String EDate = eDate.getText().toString().trim();
+                boolean result = checkDate(SDate,EDate);
+                if(result == true) {
+                    Intent i = new Intent(EventCreation.this, WeatherCheck.class);
+                    i.putExtra("SDate", SDate);
+                    i.putExtra("EDate", EDate);
+                    startActivity(i);
+                }
 
-                WeatherCheck(SDate,EDate);
             }
         });
 
@@ -127,6 +133,7 @@ public class EventCreation extends AppCompatActivity {
     }
     public boolean validate(String Name, String Des, String Location, String STime, String ETime, String SDate, String EDate){
 
+
         if(TextUtils.isEmpty(Name)){
             Toast.makeText(this,"You should enter the Event Name", Toast.LENGTH_LONG).show();
             return false;
@@ -156,182 +163,55 @@ public class EventCreation extends AppCompatActivity {
             Toast.makeText(this,"You should enter the Event End Time", Toast.LENGTH_LONG).show();
             return false;
         }
-        else
-            return true;
+
+        else {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            Date startDate,endDate;
+            try {
+                startDate = dateFormat.parse(SDate);
+                endDate = dateFormat.parse(EDate);
+            } catch (ParseException e) {
+                Toast.makeText(this,"You should enter a valid Date", Toast.LENGTH_LONG).show();
+                return false;
+            }
+            try{
+                timeFormat.parse(STime);
+                timeFormat.parse(ETime);
+            } catch (ParseException e){
+                Toast.makeText(this, "You should enter a valid Time", Toast.LENGTH_LONG).show();
+                return false;
+            }
+            boolean results = checkDate(SDate,EDate);
+            if(results == false){
+                return false;
+            }
+            else {
+                if (startDate.compareTo(endDate) <= 0)
+                    return true;
+                else {
+                    Toast.makeText(this, "End Date is before Start Date", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+
+
+        }
 
     }
 
 
-    public void WeatherCheck(final String StDate, final String EdDate){
+    public boolean checkDate(String StDate, String EdDate) {
+
+        if(StDate.matches("^\\d{4}-\\d{2}-\\d{2}$") && EdDate.matches("^\\d{4}-\\d{2}-\\d{2}$"))
+            return true;
+        else
+            Toast.makeText(this,"You should enter a valid Date", Toast.LENGTH_LONG).show();
+        return false;
+    }
 
 
 
-
-        String url = "https://api.apixu.com/v1/forecast.json?key=bc3127f6af2b4880a7d122952190803&q=Singapore&days=10";
-
-        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-
-                    List<Date> dates = getDates(StDate,EdDate);
-                    ArrayList<Date> rainDates = new ArrayList<>();
-                    ArrayList<Date> clearDates = new ArrayList<>();
-                    DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
-                    String Result ="a";
-                    int rainCheck,dateCheck,clearNum;
-
-                    rainCheck = 0; dateCheck=0; clearNum=0;
-
-                    JSONObject outer = response.getJSONObject("forecast");
-                    JSONArray weather = outer.getJSONArray("forecastday");
-
-                    for(int i=0;i< weather.length();i++){
-                        JSONObject forecast = weather.getJSONObject(i);
-                        JSONObject day = forecast.getJSONObject("day");
-                        String checkDate = forecast.getString("date").trim();
-                        for(Date date:dates) {
-                           String varDate = df1.format(date);
-
-                           if(varDate.equals(checkDate)) {
-                               JSONObject Condition = day.getJSONObject("condition");
-                               String rain = Condition.getString("text").trim();
-                                    dateCheck=1;
-
-                               if (rain.contains("rain")) {
-                                   rainCheck = 1;
-                                   Date date1 = df1.parse(checkDate);
-                                   Calendar cal1 = Calendar.getInstance();
-                                   cal1.setTime(date1);
-                                   rainDates.add(cal1.getTime());
-
-
-
-                               }
-                               else{
-                                   Date date1= df1.parse(checkDate);
-                                   Calendar cal1 = Calendar.getInstance();
-                                   cal1.setTime(date1);
-                                   clearDates.add(cal1.getTime());
-                                   clearNum++;
-
-                               }
-
-
-                           }
-                        }
-                    }
-                    if(dateCheck == 0){
-                        Result = "Unable to forecast weather as date is too far ahead";
-                    }
-                    else if(rainCheck == 0) {
-                        Result = "Weather forecast shows no chance of rain";
-                    }
-                    else {
-                        String r ="";
-                        r += "Dates with chance of rain: \n";
-                        for(Date date:rainDates){
-
-                            r += df1.format(date) +" \n";
-                        }
-                        if(clearNum != 0) {
-                            r += " Dates without any chance of rain: \n";
-                            for (Date date : clearDates) {
-                                r += df1.format(date) + " \n";
-                            }
-                        }
-                        List<Date> unusedDates = removeAppearedDate(dates,rainDates,clearDates);
-                        if(unusedDates.size() !=0){
-                            r += "Dates too far ahead to forecast: \n";
-                            for(Date date : unusedDates){
-                                r += df1.format(date) + " \n";
-                            }
-                        }
-
-                        Result = r;
-                    }
-                    tvWeather.setText(Result);
-
-
-                }catch(JSONException e){
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }
-        );
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(jor);
-     }
-
-
-
-     public static List<Date> getDates(String dateString1, String dateString2){
-        ArrayList<Date> dates = new ArrayList<>();
-        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = null;
-        Date date2 = null;
-
-        try{
-            date1 = df1.parse(dateString1);
-            date2 = df1.parse(dateString2);
-
-        }catch(ParseException e){
-            e.printStackTrace();
-        }
-
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(date1);
-
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(date2);
-
-        while(!cal1.after(cal2)){
-            dates.add(cal1.getTime());
-            cal1.add(Calendar.DATE,1);
-        }
-        return dates;
-     }
-     public static List<Date> removeAppearedDate(List<Date> o,List<Date> rain, List<Date> clear) throws ParseException {
-         ArrayList<Date> dates = new ArrayList<>();
-         int check = 0;
-        for(Date date:o){
-             check = 0;
-
-            for(Date rainDate:rain){
-
-                if(date.equals(rainDate)){
-                    check = 1;
-                }
-
-            }
-
-            for(Date clearDate:clear){
-
-                if(date.equals(clearDate)){
-                  check = 1;
-                }
-
-            }
-            if(check == 0)
-            {
-                Calendar cal1 = Calendar.getInstance();
-                cal1.setTime(date);
-                dates.add(cal1.getTime());
-            }
-        }
-
-        return dates;
-
-     }
 
 
 }

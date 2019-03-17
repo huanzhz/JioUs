@@ -52,7 +52,8 @@
         <activity android:name=".AccountActivity.ResetPasswordActivity" />
         <activity android:name=".AccountActivity.SignupActivity" />
         <activity android:name=".AccountActivity.ProfileActivity" />
-
+        <activity android:name=".EventActivity.WeatherCheck"
+            android:theme="@style/AppTheme.CustomTheme"/>
         <service
             android:name=".Notification.MyFirebaseService"
             android:enabled="true"
